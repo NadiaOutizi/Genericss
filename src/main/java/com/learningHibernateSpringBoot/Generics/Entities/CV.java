@@ -1,21 +1,13 @@
 package com.learningHibernateSpringBoot.Generics.Entities;
 
 import jakarta.persistence.*;
-
 import java.util.*;
 
-
 @Entity
-public class CV {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CV extends BaseEntity {
+
     private String title;
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @ManyToMany
     @JoinTable(
             name = "cv_competence",
@@ -23,14 +15,6 @@ public class CV {
             inverseJoinColumns = @JoinColumn(name = "competence_id")
     )
     private List<Competence> competences;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -46,5 +30,13 @@ public class CV {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
     }
 }
